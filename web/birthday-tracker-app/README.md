@@ -1,3 +1,8 @@
+# Personal Notes
+Submitting to this application is currently being done using a PAT that expires feb 24th, 2023. You should be able to 
+regenerate this from the webstorm IDE pretty easily. I used the default permissions that the modal opened with. The 
+important permission will be the repo permission which allows you to commit files.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
