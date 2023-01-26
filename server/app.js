@@ -6,7 +6,7 @@ var logger = require('morgan');
 var cors = require('cors');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/birthdays');
 
 var app = express();
 
@@ -22,98 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-//// driver implementation
-
-const sql = require('mssql/msnodesqlv8');
-
-// config for your database
-const config = {
-  database: 'birthday-tracker',
-  server: '(LocalDb)\\MSSQLLocalDB',
-  driver: 'msnodesqlv8',
-  options : {
-    trustedConnection : true
-  }
-};
-console.log('starting sql');
-
-sql.connect(config, function (err) {
-
-  if (err) console.log(err);
-
-  // create Request object
-  var request = new sql.Request();
-
-  // query to the database and get the records
-  request.query('select * from birthdays', function (err, recordset) {
-
-    if (err) console.log(err)
-
-    console.log('here is the recordset');
-    console.log(recordset);
-    // send records as a response
-    //res.send(recordset);
-
-  });
-});
-
-// const pool = new sql.ConnectionPool(config);
-// pool.connect().then(() => {
-//   //simple query
-//   pool.request().query('select * from birthdays', (err, result) => {
-//     if(err) res.send(err)
-//     else{
-//       return res.json({
-//         data : result.recordset
-//       })
-//     }
-//   })
-//   sql.close();
-// })
-console.log('ending sql');
-
-///////////////////////
-// var sql = require("mssql");
-//
-//
-// // server: 'DESKTOP-1HBVH0I\\LOCALDB#4E0DFA31',
-//
-// // server: '(localdb)\\mssqllocaldb',
-//
-// // config for your database
-// var config = {
-//   user: 'glg',
-//   password: 'sA!Gt9]RZ6@p`~2/',
-//   server: '(LocalDb)\\MSSQLLocalDB',
-//   database: 'birthday-tracker'
-// };
-//
-// // connect to your database
-// sql.connect(config, function (err) {
-//
-//   if (err) console.log(err);
-//
-//   // create Request object
-//   var request = new sql.Request();
-//
-//   // query to the database and get the records
-//   request.query('select * from birthdays', function (err, recordset) {
-//
-//     if (err) console.log(err)
-//
-//     console.log('here is the recordset');
-//     console.log(recordset);
-//     // send records as a response
-//     //res.send(recordset);
-//
-//   });
-// });
-
-
-
-/////////////
+app.use('/birthdays', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -130,15 +39,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-// app.get('/', ((req, res) => {
-//   console.log('get function was hit');
-//   res.send('hello world!');
-// }))
-//
-// const port = 3000;
-// app.listen(port, () => {
-//   console.log(`Example app listening on port ${port}`)
-// })
 
 module.exports = app;
