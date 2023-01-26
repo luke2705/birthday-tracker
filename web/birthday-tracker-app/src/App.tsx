@@ -1,7 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import BirthdayChip from './components/birthday-chip';
+import styled from 'styled-components';
 
+
+const MainContentContainer = styled.div`
+    padding: 0 80px;
+`;
+
+const BirthdayChipContainer = styled.div`
+    padding: 80px 40px;
+    border-bottom: 4px solid orange;
+    margin-bottom: 40px;
+`;
 
 function App() {
   const [greeting, setGreeting] = useState();
@@ -9,7 +20,7 @@ function App() {
 
   useEffect(() => {
     fetch('http://127.0.0.1:3000/', {
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        method: 'GET',
 
         headers: {
         'Content-Type': 'application/json'
@@ -32,20 +43,16 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Birthday Strings</h1>
-        <h2>{greeting}</h2>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+        <MainContentContainer>
+            <BirthdayChipContainer>
+                {
+                    [...Array(5)].map(_ => <BirthdayChip/>)
+                }
+            </BirthdayChipContainer>
+            <h2>Player 3 has entered?</h2>
+            <BirthdayChip onClick={() => alert('launch add modal')}/>
+        </MainContentContainer>
     </div>
   );
 }
