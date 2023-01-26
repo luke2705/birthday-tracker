@@ -15,13 +15,12 @@ const BirthdayChipContainer = styled.div`
 `;
 
 function App() {
-  const [greeting, setGreeting] = useState();
+  const [birthdays, setBirthdays] = useState([]);
 
 
   useEffect(() => {
-    fetch('http://127.0.0.1:3000/', {
+    fetch('http://127.0.0.1:3000/birthdays', {
         method: 'GET',
-
         headers: {
         'Content-Type': 'application/json'
         },
@@ -29,7 +28,7 @@ function App() {
         .then(res => res.json())
         .then(
             (result) => {
-                setGreeting(result.hello);
+                setBirthdays(result);
             },
             // Note: it's important to handle errors here
             // instead of a catch() block so that we don't swallow
@@ -46,8 +45,8 @@ function App() {
       </header>
         <MainContentContainer>
             <BirthdayChipContainer>
-                {
-                    [...Array(5)].map(_ => <BirthdayChip/>)
+                {birthdays &&
+                    birthdays.map(birthdayInfo => <BirthdayChip birthdayInfo={birthdayInfo}/>)
                 }
             </BirthdayChipContainer>
             <h2>Player 3 has entered?</h2>

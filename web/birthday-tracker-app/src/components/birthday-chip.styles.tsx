@@ -36,6 +36,7 @@ export const Name = styled.span`
     font-size: 20px;
     font-weight: 600;
     margin-right: 10px;
+    text-transform: capitalize;
 `;
 
 export const Birthday = styled.span`

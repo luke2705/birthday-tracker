@@ -12,8 +12,8 @@ const BirthdayChip = (props:any) => {
 
             <div>
                 <FirstLine>
-                    <Name>Owen</Name>
-                    <span>3 years old</span>
+                    <Name>{props.birthdayInfo?.name}</Name>
+                    <span>{props.birthdayInfo?.age} years old</span>
                 </FirstLine>
                 <Birthday>Mar 9, 2020</Birthday>
             </div>
