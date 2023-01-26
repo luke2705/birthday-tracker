@@ -9,13 +9,31 @@ const MainContentContainer = styled.div`
 `;
 
 const BirthdayChipContainer = styled.div`
-    padding: 80px 40px;
+    padding: 80px 40px 50px;
     border-bottom: 4px solid orange;
     margin-bottom: 40px;
 `;
 
+const ClickingInstructions = styled.p`
+    margin-top: 20px;
+`;
+
+type Birthday = {
+    name: string;
+    age: number;
+}
+
 function App() {
-  const [birthdays, setBirthdays] = useState([]);
+  const [birthdays, setBirthdays] = useState<Birthday[]>([]);
+  const [selectedBirthdayId, setSelectedBirthdayId] = useState<string>('');
+
+  function toggleIsSelected(birthdayThatWasClicked: Birthday) {
+      if (birthdayThatWasClicked['name'] === selectedBirthdayId) {
+          setSelectedBirthdayId('');
+      } else {
+          setSelectedBirthdayId(birthdayThatWasClicked.name);
+      }
+  }
 
 
   useEffect(() => {
@@ -46,8 +64,13 @@ function App() {
         <MainContentContainer>
             <BirthdayChipContainer>
                 {birthdays &&
-                    birthdays.map(birthdayInfo => <BirthdayChip birthdayInfo={birthdayInfo}/>)
+                    birthdays.map(birthdayInfo =>
+                        <BirthdayChip
+                            onClick={()=> toggleIsSelected(birthdayInfo)}
+                            isSelected={birthdayInfo.name === selectedBirthdayId}
+                            birthdayInfo={birthdayInfo}/>)
                 }
+                <ClickingInstructions>Select a birthday to show relative ages!</ClickingInstructions>
             </BirthdayChipContainer>
             <h2>Player 3 has entered?</h2>
             <BirthdayChip onClick={() => alert('launch add modal')}/>

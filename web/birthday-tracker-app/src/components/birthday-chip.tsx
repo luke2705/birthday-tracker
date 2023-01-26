@@ -5,7 +5,7 @@ import ProfilePicture from './svgs/profile-picture';
 
 const BirthdayChip = (props:any) => {
     return (
-        <ChipContainer onClick={props.onClick}>
+        <ChipContainer onClick={props.onClick} className={props.isSelected ? 'selected' : ''}>
             <ProfilePictureContainer>
                 <ProfilePicture/>
             </ProfilePictureContainer>

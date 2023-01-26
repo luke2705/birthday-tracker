@@ -14,12 +14,15 @@ export const ChipContainer = styled.span`
     border: 1px solid gray;
     border-radius: 20px;
     transition: box-shadow 500ms, border-color 500ms, transform 500ms linear;
+    box-shadow: none;
     
-    :hover {
+    :hover, &.selected {
         transform: translateY(-10px);
-        border-color: purple;
         box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
         cursor: pointer;
+    }
+    &.selected {
+        border-color: purple;
     }
     
     :not(:last-child) {
