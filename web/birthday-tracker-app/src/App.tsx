@@ -2,7 +2,17 @@ import React, {useEffect, useState} from 'react';
 import './App.scss';
 import BirthdayChip from './components/birthday-chip/birthday-chip';
 import styled from 'styled-components';
+import mockJson from './utils/mockData.json';
 
+const MockDataRibbon = styled.span`
+    background: green;
+    padding: 10px 50px;
+    font-size: 12px;
+    position: absolute;
+    top: 24px;
+    left: -49px;
+    transform: rotate(-45deg);
+`;
 
 const MainContentContainer = styled.div`
     padding: 0 80px;
@@ -20,7 +30,7 @@ const ClickingInstructions = styled.p`
 
 export type Birthday = {
     name: string;
-    birthday?: Date;
+    birthday?: string;
 }
 
 function App() {
@@ -35,8 +45,14 @@ function App() {
       }
   }
 
-
+  const useMockData = true;
   useEffect(() => {
+    if (useMockData) {
+        const mockData = mockJson as Birthday[];
+        setBirthdays(mockData);
+        return;
+    }
+
     fetch('http://127.0.0.1:3000/birthdays', {
         method: 'GET',
         headers: {
@@ -59,6 +75,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+          {useMockData && <MockDataRibbon title={'Consult README for more info'}>Using Mock Data</MockDataRibbon>}
         <h1>Birthday Tracker</h1>
       </header>
         <MainContentContainer>

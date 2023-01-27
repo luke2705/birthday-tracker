@@ -3,9 +3,12 @@ Submitting to this application is currently being done using a PAT that expires 
 regenerate this from the webstorm IDE pretty easily. I used the default permissions that the modal opened with. The 
 important permission will be the repo permission which allows you to commit files.
 
-# Getting Started with Create React App
+## Mock Data
+No database? No problem! The application uses mock data by default. You can update this by setting `useMockData = false` in the `App.tsx` file.
+This will then query for birthday data using the configured endpoints.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Getting Started 
+
 
 ## Available Scripts
 
@@ -14,7 +17,8 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser. 
+This uses mock data by default.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
