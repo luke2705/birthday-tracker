@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './App.scss';
-import BirthdayChip from './components/birthday-chip';
+import BirthdayChip from './components/birthday-chip/birthday-chip';
 import styled from 'styled-components';
 
 

@@ -1,8 +1,8 @@
 import { Birthday, BirthdayInfoContainer, ChipContainer, FirstLine, Name, ProfilePictureContainer } from './birthday-chip.styles';
 import React from 'react';
-import ProfilePicture from './svgs/profile-picture';
+import DefaultProfilePicture from '../default-profile-picture';
 import { add, parseISO } from 'date-fns';
-import { formatBirthday, getDisplayAge } from './utils/dates';
+import { formatBirthday, getDisplayAge } from '../../utils/dates';
 
 
 const BirthdayChip = (props:any) => {
@@ -13,7 +13,7 @@ const BirthdayChip = (props:any) => {
     return (
         <ChipContainer onClick={props.onClick} className={props.isSelected ? 'selected' : ''}>
             <ProfilePictureContainer>
-                <ProfilePicture/>
+                <DefaultProfilePicture/>
             </ProfilePictureContainer>
 
             <BirthdayInfoContainer>
