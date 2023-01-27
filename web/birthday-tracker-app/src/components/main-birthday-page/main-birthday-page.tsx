@@ -10,8 +10,9 @@ const MainBirthdayPage = (props: any) => {
     const [birthdays, setBirthdays] = useState<Birthday[]>([]);
     const [selectedBirthday, setSelectedBirthday] = useState<Birthday>();
 
-    function toggleIsSelected(birthdayThatWasClicked: Birthday) {
+    function handleBirthdayChipClick(birthdayThatWasClicked: Birthday) {
         if (birthdayThatWasClicked === selectedBirthday) {
+            // user is unselecting this birthday
             setSelectedBirthday({name: ''});
         } else {
             setSelectedBirthday(birthdayThatWasClicked);
@@ -44,27 +45,34 @@ const MainBirthdayPage = (props: any) => {
 
     useEffect(loadBirthdayData, []);
 
+    function getInstructionText() {
+        if (selectedBirthday?.name === undefined || selectedBirthday?.name === '') {
+            return "Select a birthday to show relative ages!";
+        } else {
+            return "Click " + selectedBirthday?.name + " again to show absolute ages!";
+        }
+    }
+
     return (
         <MainContentContainer>
             <BirthdayChipContainer>
                 {birthdays &&
-                birthdays.map(birthdayInfo =>
-                    <BirthdayChip
-                        onClick={()=> toggleIsSelected(birthdayInfo)}
-                        isSelected={birthdayInfo.name === selectedBirthday?.name}
-                        comparisonBirthday={selectedBirthday?.birthday}
-                        birthdayInfo={birthdayInfo}/>)
+                    birthdays.map(birthdayInfo =>
+                        <BirthdayChip
+                            onClick={() => handleBirthdayChipClick(birthdayInfo)}
+                            isSelected={birthdayInfo.name === selectedBirthday?.name}
+                            comparisonBirthday={selectedBirthday?.birthday}
+                            birthdayInfo={birthdayInfo}/>)
                 }
                 <ClickingInstructions>
-                    { selectedBirthday?.name=='' &&
-                        <span>Select a birthday to show relative ages!</span>
-                    }
-                    { selectedBirthday?.name!='' &&
-                        <span>Click {selectedBirthday?.name} again to show absolute ages!</span>
-                    }
+                    <span>
+                        { getInstructionText() }
+                    </span>
                 </ClickingInstructions>
             </BirthdayChipContainer>
-            <button onClick={() => alert('This functionality  is on the feature backlog')}>Player {birthdays.length + 1} has entered?</button>
+            <button onClick={() => alert('This functionality  is on the feature backlog')}>
+                Player {birthdays.length + 1} has entered?
+            </button>
         </MainContentContainer>
     );
 }
