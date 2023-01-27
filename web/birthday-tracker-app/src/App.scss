@@ -7,6 +7,10 @@ body {
 }
 
 .App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
   text-align: center;
   color: #3b3b3b;
   user-select: none;
