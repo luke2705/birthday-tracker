@@ -81,8 +81,7 @@ function App() {
                 </ClickingInstructions>
 
             </BirthdayChipContainer>
-            <h2>Player 3 has entered?</h2>
-            <BirthdayChip onClick={() => alert('launch add modal')}/>
+            <button onClick={() => alert('This functionality  is on the feature backlog')}>Player {birthdays.length + 1} has entered?</button>
         </MainContentContainer>
     </div>
   );
