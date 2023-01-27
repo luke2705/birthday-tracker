@@ -5,7 +5,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  executeQuery('select * from birthdays', res);
+  executeQuery('select * from birthdays order by birthday', res);
 });
 
 module.exports = router;
