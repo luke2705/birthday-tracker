@@ -18,20 +18,20 @@ const ClickingInstructions = styled.p`
     margin-top: 20px;
 `;
 
-type Birthday = {
+export type Birthday = {
     name: string;
-    age: number;
+    birthday?: Date;
 }
 
 function App() {
   const [birthdays, setBirthdays] = useState<Birthday[]>([]);
-  const [selectedBirthdayId, setSelectedBirthdayId] = useState<string>('');
+  const [selectedBirthday, setSelectedBirthday] = useState<Birthday>();
 
   function toggleIsSelected(birthdayThatWasClicked: Birthday) {
-      if (birthdayThatWasClicked['name'] === selectedBirthdayId) {
-          setSelectedBirthdayId('');
+      if (birthdayThatWasClicked === selectedBirthday) {
+          setSelectedBirthday({name: ''});
       } else {
-          setSelectedBirthdayId(birthdayThatWasClicked.name);
+          setSelectedBirthday(birthdayThatWasClicked);
       }
   }
 
@@ -59,7 +59,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Birthday Strings</h1>
+        <h1>Birthday Tracker</h1>
       </header>
         <MainContentContainer>
             <BirthdayChipContainer>
@@ -67,10 +67,19 @@ function App() {
                     birthdays.map(birthdayInfo =>
                         <BirthdayChip
                             onClick={()=> toggleIsSelected(birthdayInfo)}
-                            isSelected={birthdayInfo.name === selectedBirthdayId}
+                            isSelected={birthdayInfo.name === selectedBirthday?.name}
+                            comparisonBirthday={selectedBirthday?.birthday}
                             birthdayInfo={birthdayInfo}/>)
                 }
-                <ClickingInstructions>Select a birthday to show relative ages!</ClickingInstructions>
+                <ClickingInstructions>
+                    { selectedBirthday?.name=='' &&
+                        <span>Select a birthday to show relative ages!</span>
+                    }
+                    { selectedBirthday?.name!='' &&
+                        <span>Click {selectedBirthday?.name} again to show absolute ages!</span>
+                    }
+                </ClickingInstructions>
+
             </BirthdayChipContainer>
             <h2>Player 3 has entered?</h2>
             <BirthdayChip onClick={() => alert('launch add modal')}/>

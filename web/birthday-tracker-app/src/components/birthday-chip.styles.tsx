@@ -9,7 +9,8 @@ export const ProfilePictureContainer = styled.div`
 `;
 
 export const ChipContainer = styled.span`
-    display: inline-flex;  
+    width: 270px;
+    display: inline-flex;
     padding: 15px;
     border: 1px solid gray;
     border-radius: 20px;
@@ -30,6 +31,10 @@ export const ChipContainer = styled.span`
     }
 `;
 
+export const BirthdayInfoContainer = styled.div`
+    text-align: start;
+`;
+
 export const FirstLine = styled.div`
     display: flex;
     align-items: flex-end;
@@ -43,5 +48,6 @@ export const Name = styled.span`
 `;
 
 export const Birthday = styled.span`
+    text-align: start;
     font-size: 14px;
 `;
