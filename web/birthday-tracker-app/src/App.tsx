@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './App.scss';
-import BirthdayChip from './components/birthday-chip/birthday-chip';
 import styled from 'styled-components';
-import mockJson from './utils/mockData.json';
+import MainBirthdayPage from './components/main-birthday-page/main-birthday-page';
 
 const MockDataRibbon = styled.span`
     background: green;
@@ -14,19 +13,6 @@ const MockDataRibbon = styled.span`
     transform: rotate(-45deg);
 `;
 
-const MainContentContainer = styled.div`
-    padding: 0 80px;
-`;
-
-const BirthdayChipContainer = styled.div`
-    padding: 80px 40px 50px;
-    border-bottom: 4px solid orange;
-    margin-bottom: 40px;
-`;
-
-const ClickingInstructions = styled.p`
-    margin-top: 20px;
-`;
 
 export type Birthday = {
     name: string;
@@ -34,72 +20,15 @@ export type Birthday = {
 }
 
 function App() {
-  const [birthdays, setBirthdays] = useState<Birthday[]>([]);
-  const [selectedBirthday, setSelectedBirthday] = useState<Birthday>();
-
-  function toggleIsSelected(birthdayThatWasClicked: Birthday) {
-      if (birthdayThatWasClicked === selectedBirthday) {
-          setSelectedBirthday({name: ''});
-      } else {
-          setSelectedBirthday(birthdayThatWasClicked);
-      }
-  }
-
   const useMockData = true;
-  useEffect(() => {
-    if (useMockData) {
-        const mockData = mockJson as Birthday[];
-        setBirthdays(mockData);
-        return;
-    }
 
-    fetch('http://127.0.0.1:3000/birthdays', {
-        method: 'GET',
-        headers: {
-        'Content-Type': 'application/json'
-        },
-    })
-        .then(res => res.json())
-        .then(
-            (result) => {
-                setBirthdays(result);
-            },
-            // Note: it's important to handle errors here
-            // instead of a catch() block so that we don't swallow
-            // exceptions from actual bugs in components.
-            (error) => {
-              console.log('error: ', error);
-            }
-        )
-  }, [])
   return (
     <div className="App">
       <header className="App-header">
           {useMockData && <MockDataRibbon title={'Consult README for more info'}>Using Mock Data</MockDataRibbon>}
         <h1>Birthday Tracker</h1>
       </header>
-        <MainContentContainer>
-            <BirthdayChipContainer>
-                {birthdays &&
-                    birthdays.map(birthdayInfo =>
-                        <BirthdayChip
-                            onClick={()=> toggleIsSelected(birthdayInfo)}
-                            isSelected={birthdayInfo.name === selectedBirthday?.name}
-                            comparisonBirthday={selectedBirthday?.birthday}
-                            birthdayInfo={birthdayInfo}/>)
-                }
-                <ClickingInstructions>
-                    { selectedBirthday?.name=='' &&
-                        <span>Select a birthday to show relative ages!</span>
-                    }
-                    { selectedBirthday?.name!='' &&
-                        <span>Click {selectedBirthday?.name} again to show absolute ages!</span>
-                    }
-                </ClickingInstructions>
-
-            </BirthdayChipContainer>
-            <button onClick={() => alert('This functionality  is on the feature backlog')}>Player {birthdays.length + 1} has entered?</button>
-        </MainContentContainer>
+        <MainBirthdayPage useMockData={useMockData}/>
     </div>
   );
 }
