@@ -14,22 +14,21 @@ const MockDataRibbon = styled.span`
 `;
 
 
-export type Birthday = {
-    name: string;
-    birthday?: string;
-}
-
 function App() {
   const useMockData = true;
 
   return (
-    <div className="App">
-      <header className="App-header">
-          {useMockData && <MockDataRibbon title={'Consult README for more info'}>Using Mock Data</MockDataRibbon>}
-        <h1>Birthday Tracker</h1>
-      </header>
-        <MainBirthdayPage useMockData={useMockData}/>
-    </div>
+      <div className="App">
+          <header className="App-header">
+              { useMockData &&
+                  <MockDataRibbon title={'Consult README for more info'}>
+                      Using Mock Data
+                  </MockDataRibbon>
+              }
+              <h1>Birthday Tracker</h1>
+          </header>
+          <MainBirthdayPage useMockData={useMockData}/>
+      </div>
   );
 }
 

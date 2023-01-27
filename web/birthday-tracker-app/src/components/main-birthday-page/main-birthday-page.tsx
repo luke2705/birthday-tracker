@@ -1,8 +1,8 @@
 import BirthdayChip from '../birthday-chip/birthday-chip';
-import React, {useEffect, useState} from 'react';
-import {Birthday} from '../../App';
+import React, { useEffect, useState } from 'react';
+import { Birthday } from '../../types/birthday';
 import mockJson from '../../utils/mockData.json';
-import {BirthdayChipContainer, ClickingInstructions, MainContentContainer} from './main-birthday-page.styles';
+import { BirthdayChipContainer, ClickingInstructions, MainContentContainer } from './main-birthday-page.styles';
 
 
 
