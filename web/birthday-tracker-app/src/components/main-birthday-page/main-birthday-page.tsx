@@ -9,15 +9,23 @@ import {
     MainContentContainer
 } from './main-birthday-page.styles';
 import { BIRTHDAYS_ROUTE } from '../../utils/routes';
+import BirthdayChipLoadingState from '../birthday-chip/birthday-chip-loading-state';
 
 
 
 const MainBirthdayPage = (props: any) => {
     const [birthdays, setBirthdays] = useState<Birthday[]>([]);
     const [selectedBirthday, setSelectedBirthday] = useState<Birthday>();
+    const [isLoading, setIsLoading] = useState(true);
 
     // load birthday data when this component is initialized
-    useEffect(loadBirthdayData, []);
+    useEffect(() => {
+        // simulate server latency to show loading screen
+        setTimeout(() => {
+            loadBirthdayData();
+            setIsLoading(false);
+        }, 3000);
+    }, []);
 
     function loadBirthdayData() {
         if (props.useMockData) {
@@ -70,7 +78,10 @@ const MainBirthdayPage = (props: any) => {
     return (
         <MainContentContainer>
             <BirthdayChipContainer>
-                { birthdays &&
+                { isLoading &&
+                [...Array(5)].map(b =>
+                    <BirthdayChipLoadingState/>)}
+                { !isLoading && birthdays &&
                     birthdays.map(birthdayInfo =>
                         <BirthdayChip
                             onClick={() => handleBirthdayChipClick(birthdayInfo)}
