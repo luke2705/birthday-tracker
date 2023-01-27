@@ -2,7 +2,12 @@ import BirthdayChip from '../birthday-chip/birthday-chip';
 import React, { useEffect, useState } from 'react';
 import { Birthday } from '../../types/birthday';
 import mockJson from '../../utils/mockData.json';
-import { BirthdayChipContainer, ClickingInstructions, MainContentContainer } from './main-birthday-page.styles';
+import {
+    AddBirthdayButton,
+    BirthdayChipContainer,
+    ClickingInstructions,
+    MainContentContainer
+} from './main-birthday-page.styles';
 import { BIRTHDAYS_ROUTE } from '../../utils/routes';
 
 
@@ -79,9 +84,9 @@ const MainBirthdayPage = (props: any) => {
                     </span>
                 </ClickingInstructions>
             </BirthdayChipContainer>
-            <button onClick={() => alert('This functionality  is on the feature backlog')}>
+            <AddBirthdayButton onClick={() => alert('This functionality  is on the feature backlog')}>
                 Player {birthdays.length + 1} has entered?
-            </button>
+            </AddBirthdayButton>
         </MainContentContainer>
     );
 }

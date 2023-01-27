@@ -13,3 +13,7 @@ export const BirthdayChipContainer = styled.div`
 export const ClickingInstructions = styled.p`
     margin-top: 20px;
 `;
+
+export const AddBirthdayButton = styled.button`
+    margin-bottom: 20px;
+`;
