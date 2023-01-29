@@ -10,13 +10,16 @@ import {
 } from './main-birthday-page.styles';
 import { BIRTHDAYS_ROUTE } from '../../utils/routes';
 import BirthdayChipLoadingState from '../birthday-chip/birthday-chip-loading-state';
+import AddBirthdayOverlay from '../overlays/add-birthday-overlay';
 
 
 
 const MainBirthdayPage = (props: any) => {
+    const [isLoading, setIsLoading] = useState(true);
     const [birthdays, setBirthdays] = useState<Birthday[]>([]);
     const [selectedBirthday, setSelectedBirthday] = useState<Birthday>();
-    const [isLoading, setIsLoading] = useState(true);
+    const [showAddBirthdayOverlay, setShowAddBirthdayOverlay] = useState(false);
+
 
     // load birthday data when this component is initialized
     useEffect(() => {
@@ -47,15 +50,15 @@ const MainBirthdayPage = (props: any) => {
                 'Content-Type': 'application/json'
             },
         })
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setBirthdays(result);
-                },
-                (error) => {
-                    console.log('error: ', error);
-                }
-            )
+        .then(res => res.json())
+        .then(
+            (result) => {
+                setBirthdays(result);
+            },
+            (error) => {
+                console.log('error: ', error);
+            }
+        )
     }
 
     function handleBirthdayChipClick(birthdayThatWasClicked: Birthday) {
@@ -79,15 +82,16 @@ const MainBirthdayPage = (props: any) => {
         <MainContentContainer>
             <BirthdayChipContainer>
                 { isLoading &&
-                [...Array(5)].map(b =>
-                    <BirthdayChipLoadingState/>)}
+                [...Array(5)].map((b, index) =>
+                    <BirthdayChipLoadingState key={index}/>)}
                 { !isLoading && birthdays &&
-                    birthdays.map(birthdayInfo =>
+                    birthdays.map((birthdayInfo, index) =>
                         <BirthdayChip
                             onClick={() => handleBirthdayChipClick(birthdayInfo)}
                             isSelected={birthdayInfo.name === selectedBirthday?.name}
                             comparisonBirthday={selectedBirthday?.birthday}
-                            birthdayInfo={birthdayInfo}/>)
+                            birthdayInfo={birthdayInfo}
+                        key={index}/>)
                 }
                 <ClickingInstructions>
                     <span>
@@ -95,9 +99,10 @@ const MainBirthdayPage = (props: any) => {
                     </span>
                 </ClickingInstructions>
             </BirthdayChipContainer>
-            <AddBirthdayButton onClick={() => alert('This functionality  is on the feature backlog')}>
+            <AddBirthdayButton onClick={() => setShowAddBirthdayOverlay(true)}>
                 Player {birthdays.length + 1} has entered?
             </AddBirthdayButton>
+            <AddBirthdayOverlay isVisible={showAddBirthdayOverlay} closeOverlay={() => setShowAddBirthdayOverlay(false)}/>
         </MainContentContainer>
     );
 }
