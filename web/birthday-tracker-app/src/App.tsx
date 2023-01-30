@@ -2,6 +2,9 @@ import React from 'react';
 import './App.scss';
 import styled from 'styled-components';
 import MainBirthdayPage from './components/main-birthday-page/main-birthday-page';
+import Navbar from './components/navbar';
+import { Routes, Route } from 'react-router-dom';
+import RemindersPage from './components/reminders-page/reminders-page';
 
 const MockDataRibbon = styled.span`
     background: green;
@@ -18,9 +21,8 @@ const CopyrightText = styled.span`
     margin-bottom: 10px;
 `;
 
-
 function App() {
-  const useMockData = true;
+  const useMockData = false;
 
   return (
       <div className="App">
@@ -32,9 +34,12 @@ function App() {
                       </MockDataRibbon>
                   }
                   <h1>Birthday Tracker</h1>
+                  <Navbar/>
               </header>
-              {/* add more routes here as your empire grows */}
-              <MainBirthdayPage useMockData={useMockData}/>
+              <Routes>
+                  <Route path="/" element={<MainBirthdayPage useMockData={useMockData}/>} />
+                  <Route path="/reminders" element={<RemindersPage/>} />
+              </Routes>
           </div>
           <CopyrightText>
               © 2023 Luke West. All rights reserved.

@@ -1,7 +1,7 @@
 import { differenceInMonths, format, startOfToday } from "date-fns";
 
 export function formatBirthday(birthday: Date) {
-    return format(birthday, 'MMM d, yyyy')
+    return format(birthday, 'MMM d, yyyy');
 }
 
 export function getDisplayAge (birthday: Date, comparisonBirthday?: Date) {

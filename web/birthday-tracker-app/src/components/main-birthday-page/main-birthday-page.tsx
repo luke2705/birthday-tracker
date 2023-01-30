@@ -1,17 +1,16 @@
 import BirthdayChip from '../birthday-chip/birthday-chip';
 import React, { useEffect, useState } from 'react';
 import { Birthday } from '../../types/birthday';
-import mockJson from '../../utils/mockData.json';
 import {
     AddBirthdayButton,
     BirthdayChipContainer,
     ClickingInstructions,
     MainContentContainer
 } from './main-birthday-page.styles';
-import { BIRTHDAYS_ROUTE } from '../../utils/routes';
 import BirthdayChipLoadingState from '../birthday-chip/birthday-chip-loading-state';
 import AddBirthdayOverlay from '../overlays/add-birthday-overlay/add-birthday-overlay';
 import { compareAsc, parseISO } from 'date-fns';
+import { getBirthdayData } from '../../utils/birthday-data-service';
 
 
 
@@ -22,45 +21,15 @@ const MainBirthdayPage = (props: any) => {
     const [showAddBirthdayOverlay, setShowAddBirthdayOverlay] = useState(false);
 
 
-    // load birthday data when this component is initialized
+    // get birthday data when this component is initialized
     useEffect(() => {
         // simulate server latency to show loading screen
-        setTimeout(() => {
-            loadBirthdayData();
+        setTimeout(async function() {
+            const birthdayData = await getBirthdayData(props.useMockData);
+            setBirthdays(birthdayData);
             setIsLoading(false);
         }, 3000);
     }, []);
-
-    function loadBirthdayData() {
-        if (props.useMockData) {
-            loadMockedData();
-        } else {
-            loadDataFromServer();
-        }
-    }
-
-    function loadMockedData() {
-        const mockData = mockJson as Birthday[];
-        setBirthdays(mockData);
-    }
-
-    function loadDataFromServer() {
-        fetch(BIRTHDAYS_ROUTE, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-        .then(res => res.json())
-        .then(
-            (result) => {
-                setBirthdays(result);
-            },
-            (error) => {
-                console.log('error: ', error);
-            }
-        )
-    }
 
     function handleBirthdayChipClick(birthdayThatWasClicked: Birthday) {
         if (birthdayThatWasClicked === selectedBirthday) {
