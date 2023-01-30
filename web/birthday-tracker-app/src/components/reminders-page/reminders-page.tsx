@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Birthday } from '../../types/birthday';
-import { Checkbox, MenuItem } from '@mui/material';
-import { format, parseISO } from 'date-fns';
 import { MuiTelInput } from 'mui-tel-input';
 import {
     BirthdayRemindersTable,
     PageContainer,
     SaveRemindersButton,
-    StyledSelect, SubTitle, TableData,
+    SubTitle, TableData,
     TableHeaders,
-    Title, TableRow
+    Title
 } from './reminders-page.styles';
 import { getBirthdayData, postBirthdayReminders } from '../../utils/birthday-data-service';
 import RemindersPageLoadingState from './reminders-page-loading-state';
+import BirthdayTableRow from './birthday-table-row';
 
 
 const RemindersPage = () => {
@@ -32,6 +31,17 @@ const RemindersPage = () => {
 
     function handleSaveClick() {
         postBirthdayReminders(phoneNumber, birthdays);
+    }
+
+    function updateBirthdays(updatedBirthday: Birthday) {
+        const updatedBirthdaysList = birthdays.map(birthday => {
+            if (birthday.name === updatedBirthday.name) {
+                return updatedBirthday;
+            } else {
+                return birthday;
+            }
+        })
+        setBirthdays(updatedBirthdaysList);
     }
 
     return (
@@ -60,21 +70,7 @@ const RemindersPage = () => {
                             <TableData>Reminder Enabled</TableData>
                         </TableHeaders>
                         { birthdays && birthdays.map(birthday =>
-                            <TableRow key={birthday.name}>
-                                <TableData>{birthday.name}</TableData>
-                                <TableData>{format(parseISO(birthday?.birthday as string), 'MMM d')}</TableData>
-                                <TableData>
-                                <StyledSelect defaultValue={birthday.precedingDaysForReminder == null ? 1 : birthday.precedingDaysForReminder}>
-                                        <MenuItem value={0}>Day of</MenuItem>
-                                        <MenuItem value={1}>1 Day</MenuItem>
-                                        <MenuItem value={3}>3 Days</MenuItem>
-                                        <MenuItem value={7}>7 Days</MenuItem>
-                                    </StyledSelect>
-                                </TableData>
-                                <TableData>
-                                    <Checkbox checked={birthday.reminderEnabled} color="default" />
-                                </TableData>
-                            </TableRow>
+                            <BirthdayTableRow birthday={birthday} handleBirthdayUpdate={updateBirthdays}/>
                         )}
                     </tbody>
                 </BirthdayRemindersTable>
