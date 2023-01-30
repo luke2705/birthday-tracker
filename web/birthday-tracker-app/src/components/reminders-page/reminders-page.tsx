@@ -11,7 +11,7 @@ import {
     TableHeaders,
     Title, TableRow
 } from './reminders-page.styles';
-import {getBirthdayData} from '../../utils/birthday-data-service';
+import { getBirthdayData, postBirthdayReminders } from '../../utils/birthday-data-service';
 import RemindersPageLoadingState from './reminders-page-loading-state';
 
 
@@ -30,6 +30,10 @@ const RemindersPage = () => {
         }, 3000);
     }, []);
 
+    function handleSaveClick() {
+        postBirthdayReminders(phoneNumber, birthdays);
+    }
+
     return (
         <PageContainer>
             <Title>Reminders</Title>
@@ -43,7 +47,7 @@ const RemindersPage = () => {
                 value={phoneNumber}
                 onChange={setPhoneNumber}
             />
-            <SaveRemindersButton>Save</SaveRemindersButton>
+            <SaveRemindersButton onClick={handleSaveClick}>Save</SaveRemindersButton>
             <hr/>
             { isLoading && <RemindersPageLoadingState/>}
             { !isLoading &&
@@ -60,7 +64,7 @@ const RemindersPage = () => {
                                 <TableData>{birthday.name}</TableData>
                                 <TableData>{format(parseISO(birthday?.birthday as string), 'MMM d')}</TableData>
                                 <TableData>
-                                    <StyledSelect defaultValue="1">
+                                <StyledSelect defaultValue={birthday.precedingDaysForReminder == null ? 1 : birthday.precedingDaysForReminder}>
                                         <MenuItem value={0}>Day of</MenuItem>
                                         <MenuItem value={1}>1 Day</MenuItem>
                                         <MenuItem value={3}>3 Days</MenuItem>
@@ -68,7 +72,7 @@ const RemindersPage = () => {
                                     </StyledSelect>
                                 </TableData>
                                 <TableData>
-                                    <Checkbox color="default" />
+                                    <Checkbox checked={birthday.reminderEnabled} color="default" />
                                 </TableData>
                             </TableRow>
                         )}

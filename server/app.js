@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 var birthdaysRouter = require('./routes/birthdays');
+var remindersRouter = require('./routes/reminders');
 
 var app = express();
 
@@ -22,6 +23,7 @@ app.use(cors());
 
 // actual routes that do real things
 app.use('/birthdays', birthdaysRouter);
+app.use('/reminders', remindersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

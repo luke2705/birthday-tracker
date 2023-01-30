@@ -1,6 +1,6 @@
 const config = require('./database-config');
 
-async function executeQuery(queryString, response) {
+async function executeQuery(queryString) {
     const sql = require('mssql/msnodesqlv8');
     let pool = await sql.connect(config)
     return pool.request()

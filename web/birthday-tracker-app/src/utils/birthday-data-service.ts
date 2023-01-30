@@ -1,6 +1,6 @@
 import mockJson from './mockData.json';
-import {Birthday} from '../types/birthday';
-import {BIRTHDAYS_ROUTE} from './routes';
+import { Birthday } from '../types/birthday';
+import { BIRTHDAYS_ROUTE, REMINDERS_ROUTE } from './routes';
 
 
 export async function getBirthdayData(useMockData: boolean) {
@@ -30,4 +30,24 @@ async function loadDataFromServer() {
             console.error('error: ', error);
         }
     )
+}
+
+export async function postBirthdayReminders(phoneNumber: string, birthdayData: Birthday[]) {
+    const payload = {
+        phoneNumber,
+        birthdayData
+    };
+
+    fetch(REMINDERS_ROUTE, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+        .then(() => {
+            console.log('success');
+        },
+        (error) => console.log('error: ', error)
+        )
 }

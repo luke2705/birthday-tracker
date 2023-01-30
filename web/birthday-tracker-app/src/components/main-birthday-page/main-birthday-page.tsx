@@ -34,7 +34,7 @@ const MainBirthdayPage = (props: any) => {
     function handleBirthdayChipClick(birthdayThatWasClicked: Birthday) {
         if (birthdayThatWasClicked === selectedBirthday) {
             // user is unselecting this birthday
-            setSelectedBirthday({ name: '' });
+            setSelectedBirthday({ name: '', birthday: '', precedingDaysForReminder: 0, reminderEnabled: false});
         } else {
             setSelectedBirthday(birthdayThatWasClicked);
         }

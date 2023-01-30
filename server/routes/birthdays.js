@@ -6,7 +6,7 @@ var router = express.Router();
 /* GET birthdays  */
 router.get('/', async function(req, res, next) {
   try {
-    const results = await executeQuery('select * from birthdays order by birthday', res);
+    const results = await executeQuery('select * from birthdays order by birthday');
     res.send(results.recordset);
   } catch {
     return res.status(500).send('Error inserting birthday');
