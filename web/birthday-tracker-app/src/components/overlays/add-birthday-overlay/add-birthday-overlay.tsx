@@ -4,7 +4,7 @@ import { DesktopDatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { add, format, startOfToday } from 'date-fns';
 import { useState } from 'react';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { BIRTHDAYS_ROUTE } from '../../../utils/routes';
+import { BIRTHDAYS_ROUTE } from '../../../utils/routes-constants';
 import { Button, InputForm } from './add-birthday-overlay.styles';
 
 

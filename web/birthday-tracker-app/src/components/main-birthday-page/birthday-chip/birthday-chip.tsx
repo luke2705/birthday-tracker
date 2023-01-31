@@ -8,10 +8,10 @@ import {
     XButton
 } from './birthday-chip.styles';
 import React, { useState } from 'react';
-import DefaultProfilePicture from '../default-profile-picture';
+import DefaultProfilePicture from './default-profile-picture';
 import { add, parseISO } from 'date-fns';
-import { formatBirthday, getDisplayAge } from '../../utils/dates';
-import DeleteBirthdayOverlay from '../overlays/delete-birthday-overlay/delete-birthday-overlay';
+import { formatBirthday, getDisplayAge } from '../../../utils/dates.service';
+import DeleteBirthdayOverlay from '../../overlays/delete-birthday-overlay/delete-birthday-overlay';
 
 
 const BirthdayChip = (props:any) => {

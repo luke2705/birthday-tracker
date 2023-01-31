@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const ProfilePictureContainer = styled.div`
     border-radius: 50%;
     background: lightgray;
-    width: 60px;
+    width: 83px;
     height: 60px;
     margin-right: 10px;
 `;

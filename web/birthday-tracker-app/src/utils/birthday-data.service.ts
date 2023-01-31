@@ -1,6 +1,6 @@
 import mockJson from './mockData.json';
 import { Birthday } from '../types/birthday';
-import { BIRTHDAYS_ROUTE, REMINDERS_ROUTE } from './routes';
+import { BIRTHDAYS_ROUTE, REMINDERS_ROUTE } from './routes-constants';
 
 
 export async function getBirthdayData(useMockData: boolean) {

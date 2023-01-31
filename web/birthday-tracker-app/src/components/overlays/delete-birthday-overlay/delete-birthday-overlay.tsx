@@ -1,6 +1,6 @@
 import OverlayBase from '../overlay-base/overlay-base';
-import { BIRTHDAYS_ROUTE } from '../../../utils/routes';
-import {ButtonContainer, Button, DeleteButton} from './delete-birthday-overlay.styles';
+import { BIRTHDAYS_ROUTE } from '../../../utils/routes-constants';
+import { ButtonContainer, Button, DeleteButton } from './delete-birthday-overlay.styles';
 
 
 const DeleteBirthdayOverlay = (props: any) => {

@@ -7,9 +7,9 @@ import {
     SaveRemindersButton,
     SubTitle, TableData,
     TableHeaders,
-    Title
+    Title, TopPanel
 } from './reminders-page.styles';
-import { getBirthdayData, postBirthdayReminders } from '../../utils/birthday-data-service';
+import { getBirthdayData, postBirthdayReminders } from '../../utils/birthday-data.service';
 import RemindersPageLoadingState from './reminders-page-loading-state';
 import BirthdayTableRow from './birthday-table-row';
 
@@ -46,19 +46,20 @@ const RemindersPage = () => {
 
     return (
         <PageContainer>
-            <Title>Reminders</Title>
-            <SubTitle>
-                Use this page to manage SMS text reminders for your saved birthdays. Standard messaging rates apply.
-                Currently, only phone numbers based in the United States are supported.
-            </SubTitle>
-            <MuiTelInput
-                disableDropdown
-                defaultCountry="US"
-                value={phoneNumber}
-                onChange={setPhoneNumber}
-            />
-            <SaveRemindersButton onClick={handleSaveClick}>Save</SaveRemindersButton>
-            <hr/>
+            <TopPanel>
+                <Title>Reminders</Title>
+                <SubTitle>
+                    Use this page to manage SMS text reminders for your saved birthdays. Standard messaging rates apply.
+                    Currently, only phone numbers based in the United States are supported.
+                </SubTitle>
+                <MuiTelInput
+                    disableDropdown
+                    defaultCountry="US"
+                    value={phoneNumber}
+                    onChange={setPhoneNumber}
+                />
+                <SaveRemindersButton onClick={handleSaveClick}>Save</SaveRemindersButton>
+            </TopPanel>
             { isLoading && <RemindersPageLoadingState/>}
             { !isLoading &&
                 <BirthdayRemindersTable>

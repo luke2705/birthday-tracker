@@ -1,4 +1,4 @@
-import BirthdayChip from '../birthday-chip/birthday-chip';
+import BirthdayChip from './birthday-chip/birthday-chip';
 import React, { useEffect, useState } from 'react';
 import { Birthday } from '../../types/birthday';
 import {
@@ -7,10 +7,10 @@ import {
     ClickingInstructions,
     MainContentContainer
 } from './main-birthday-page.styles';
-import BirthdayChipLoadingState from '../birthday-chip/birthday-chip-loading-state';
+import BirthdayChipLoadingState from './birthday-chip/birthday-chip-loading-state';
 import AddBirthdayOverlay from '../overlays/add-birthday-overlay/add-birthday-overlay';
 import { compareAsc, parseISO } from 'date-fns';
-import { getBirthdayData } from '../../utils/birthday-data-service';
+import { getBirthdayData } from '../../utils/birthday-data.service';
 
 
 

@@ -5,6 +5,11 @@ export const PageContainer = styled.div`
     padding: 30px;
 `;
 
+export const TopPanel = styled.div`
+    padding-bottom: 20px;
+    border-bottom: 4px solid orange;
+`;
+
 export const Title = styled.h1`
     margin-bottom: 10px;
 `;
