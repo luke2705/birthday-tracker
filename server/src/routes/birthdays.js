@@ -9,7 +9,7 @@ router.get('/', async function(req, res) {
         const results = await executeQuery('select * from birthdays order by birthday');
         res.send(results.recordset);
     } catch {
-        return res.status(500).send('Error inserting birthday');
+        return res.status(500).send('Error getting birthdays');
     }
 });
 
@@ -29,9 +29,27 @@ router.delete('/', async function(req, res) {
         await executeQuery(`delete from birthdays where name='${req.body.name}'`);
         return res.status(204).send();
     } catch {
-        return res.status(500).send('Error inserting birthday');
+        return res.status(500).send('Error deleting birthday');
     }
 });
 
+/* UPDATE birthday */
+async function updateBirthday(birthday) {
+    let queryString = `
+        update birthdays set precedingDaysForReminder=${birthday.precedingDaysForReminder}, 
+        reminderEnabled='${birthday.reminderEnabled}'
+        where name='${birthday.name}' and birthday='${birthday.birthday}' 
+    `;
+    queryString = removeQuotationMarksFromNulls(queryString)
+    await executeQuery(queryString);
+}
 
-module.exports = router;
+function removeQuotationMarksFromNulls(queryString) {
+    return queryString.replaceAll("'null'", "null");
+}
+
+
+module.exports = {
+    birthdaysRouter: router,
+    updateBirthday
+};

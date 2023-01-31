@@ -1,4 +1,5 @@
 var sendTextMessage = require('../sms-service/send_sms');
+var { updateBirthday } = require('../routes/birthdays');
 
 var executeQuery = require('../database/execute-query');
 var format = require('date-fns/format');
@@ -15,6 +16,7 @@ router.post('/', async function(req, res) {
         const peopleWithReminders = [];
 
         birthdays.forEach(birthday => {
+            saveReminderToBirthdayTable(birthday);
             const newReminder = generateNewReminderObject(birthday, phoneNumber);
             if (birthday.reminderEnabled) {
                 createOrUpdateReminder(newReminder);
@@ -30,6 +32,10 @@ router.post('/', async function(req, res) {
         return res.status(500).send('Error updating reminders');
     }
 });
+
+function saveReminderToBirthdayTable(birthday) {
+    updateBirthday(birthday);
+}
 
 function generateNewReminderObject(birthday, phoneNumber) {
     const parsedBirthday = parseISO(birthday.birthday);
