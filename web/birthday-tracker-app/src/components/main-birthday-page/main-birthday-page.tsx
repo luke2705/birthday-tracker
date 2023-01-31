@@ -71,7 +71,9 @@ const MainBirthdayPage = (props: any) => {
                             isSelected={birthdayInfo.name === selectedBirthday?.name}
                             comparisonBirthday={selectedBirthday?.birthday}
                             birthdayInfo={birthdayInfo}
-                        key={index}/>)
+                            key={index}
+                        />
+                    )
                 }
                 <ClickingInstructions>
                     { getInstructionText() }

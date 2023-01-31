@@ -69,8 +69,8 @@ const RemindersPage = () => {
                             <TableData>Number of days before</TableData>
                             <TableData>Reminder Enabled</TableData>
                         </TableHeaders>
-                        { birthdays && birthdays.map(birthday =>
-                            <BirthdayTableRow birthday={birthday} handleBirthdayUpdate={updateBirthdays}/>
+                        { birthdays && birthdays.map(birthdayInfo =>
+                            <BirthdayTableRow birthdayInfo={birthdayInfo} handleBirthdayUpdate={updateBirthdays}/>
                         )}
                     </tbody>
                 </BirthdayRemindersTable>
