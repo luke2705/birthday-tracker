@@ -16,7 +16,7 @@ import BirthdayTableRow from './birthday-table-row';
 
 const RemindersPage = () => {
     const [isLoading, setIsLoading] = useState(true);
-    const [phoneNumber, setPhoneNumber] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState('');
     const [birthdays, setBirthdays] = useState<Birthday[]>([]);
 
     // get birthday data when this component is initialized
@@ -40,7 +40,7 @@ const RemindersPage = () => {
             } else {
                 return birthday;
             }
-        })
+        });
         setBirthdays(updatedBirthdaysList);
     }
 
@@ -70,13 +70,13 @@ const RemindersPage = () => {
                             <TableData>Reminder Enabled</TableData>
                         </TableHeaders>
                         { birthdays && birthdays.map(birthdayInfo =>
-                            <BirthdayTableRow birthdayInfo={birthdayInfo} handleBirthdayUpdate={updateBirthdays}/>
+                            <BirthdayTableRow birthdayInfo={birthdayInfo} handleBirthdayUpdate={updateBirthdays} key={birthdayInfo.name}/>
                         )}
                     </tbody>
                 </BirthdayRemindersTable>
-                }
+            }
         </PageContainer>
-    )
-}
+    );
+};
 
 export default RemindersPage;

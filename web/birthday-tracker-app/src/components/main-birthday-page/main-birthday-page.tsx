@@ -42,19 +42,19 @@ const MainBirthdayPage = (props: any) => {
 
     function getInstructionText() {
         if (selectedBirthday?.name === undefined || selectedBirthday?.name === '') {
-            return "Click on a birthday to show relative ages!";
+            return 'Click on a birthday to show relative ages!';
         } else {
-            return "Click " + selectedBirthday?.name + " again to show absolute ages!";
+            return 'Click ' + selectedBirthday?.name + ' again to show absolute ages!';
         }
     }
 
     function addBirthday(birthday: Birthday) {
         const newBirthdayList = [...birthdays, birthday];
         newBirthdayList.sort((a, b) => {
-            const a_Birthday = parseISO(a.birthday as string);
-            const b_Birthday = parseISO(b.birthday as string);
-            return compareAsc(a_Birthday, b_Birthday);
-        })
+            const aBirthday = parseISO(a.birthday as string);
+            const bBirthday = parseISO(b.birthday as string);
+            return compareAsc(aBirthday, bBirthday);
+        });
         setBirthdays(newBirthdayList);
     }
 
@@ -88,6 +88,6 @@ const MainBirthdayPage = (props: any) => {
                 onBirthdayAdd={addBirthday}/>
         </MainContentContainer>
     );
-}
+};
 
 export default MainBirthdayPage;

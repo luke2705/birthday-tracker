@@ -1,6 +1,6 @@
 import { ChipContainer } from './birthday-chip.styles';
 import React from 'react';
-import ContentLoader from "react-content-loader"
+import ContentLoader from 'react-content-loader';
 
 const BirthdayChipLoadingState = () => {
     return (
@@ -19,7 +19,7 @@ const BirthdayChipLoadingState = () => {
                 <rect x="78" y="36" rx="3" ry="3" width="152" height="16" />
             </ContentLoader>
         </ChipContainer>
-    )
-}
+    );
+};
 
 export default BirthdayChipLoadingState;

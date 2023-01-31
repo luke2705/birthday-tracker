@@ -26,12 +26,12 @@ const AddBirthdayOverlay = (props: any) => {
             },
             body: JSON.stringify(birthdayInfo)
         })
-        .then(() => {
-            const timezoneAdjustedBirthday = add(birthDate as Date, {days: -1})
-            props.onBirthdayAdd({...birthdayInfo, birthday: format(timezoneAdjustedBirthday, 'yyyy-MM-dd')});
-        },
-        (error) => console.log('error: ', error)
-        )
+            .then(() => {
+                const timezoneAdjustedBirthday = add(birthDate as Date, {days: -1});
+                props.onBirthdayAdd({...birthdayInfo, birthday: format(timezoneAdjustedBirthday, 'yyyy-MM-dd')});
+            },
+            (error) => console.log('error: ', error)
+            );
         props.closeOverlay();
     }
 
@@ -53,7 +53,7 @@ const AddBirthdayOverlay = (props: any) => {
                 <Button type={'submit'} value={'Submit'}/>
             </InputForm>
         </OverlayBase>
-    )
-}
+    );
+};
 
 export default AddBirthdayOverlay;

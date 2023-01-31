@@ -1,7 +1,7 @@
 const startOfToday = require('date-fns/startOfToday');
 const format = require('date-fns/format');
-const sendTextMessage = require('../sms-service/send_sms');
-const executeQuery = require('../database/execute-query');
+const sendTextMessage = require('../src/sms-service/send_sms');
+const executeQuery = require('../src/database/execute-query');
 
 async function sendTodaysReminders() {
     const todaysReminders = await getRemindersForToday();

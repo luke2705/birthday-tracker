@@ -1,0 +1,27 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended"
+  ],
+  "plugins": [
+    "unused-imports"
+  ],
+  "rules": {
+    "indent": ["error", 4],
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "unused-imports/no-unused-imports": "error",
+    "array-callback-return": ["error", { "allowImplicit": true }],
+    "camelcase": ["error", {"ignoreDestructuring": true }],
+    "max-depth": ["warn", 4],
+    "no-trailing-spaces": ["error"],
+    "space-before-blocks": ["error", "always"],
+    "keyword-spacing": ["error", { "before": true, "after": true }],
+    "arrow-spacing": ["error", { "before": true, "after": true }],
+    "switch-colon-spacing": ["error", { "after": true, "before": false }]
+  }
+}

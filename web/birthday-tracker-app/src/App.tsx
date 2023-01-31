@@ -22,30 +22,30 @@ const CopyrightText = styled.span`
 `;
 
 function App() {
-  const useMockData = false;
+    const useMockData = false;
 
-  return (
-      <div className="App">
-          <div>
-              <header className="App-header">
-                  { useMockData &&
+    return (
+        <div className="App">
+            <div>
+                <header className="App-header">
+                    { useMockData &&
                       <MockDataRibbon title={'Consult README for more info'}>
                           Using Mock Data
                       </MockDataRibbon>
-                  }
-                  <h1>Birthday Tracker</h1>
-                  <Navbar/>
-              </header>
-              <Routes>
-                  <Route path="/" element={<MainBirthdayPage useMockData={useMockData}/>} />
-                  <Route path="/reminders" element={<RemindersPage/>} />
-              </Routes>
-          </div>
-          <CopyrightText>
+                    }
+                    <h1>Birthday Tracker</h1>
+                    <Navbar/>
+                </header>
+                <Routes>
+                    <Route path="/" element={<MainBirthdayPage useMockData={useMockData}/>} />
+                    <Route path="/reminders" element={<RemindersPage/>} />
+                </Routes>
+            </div>
+            <CopyrightText>
               © 2023 Luke West. All rights reserved.
-          </CopyrightText>
-      </div>
-  );
+            </CopyrightText>
+        </div>
+    );
 }
 
 export default App;

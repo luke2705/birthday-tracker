@@ -1,7 +1,7 @@
 const DefaultProfilePicture = () => {
     return (
         <svg fill="#000000" height="100%" width="100%" version="1.1" id="Layer_1"
-             viewBox="0 0 402.161 332.161">
+            viewBox="0 0 402.161 332.161">
             <g>
                 <g>
                     <g>
@@ -22,7 +22,7 @@ const DefaultProfilePicture = () => {
                 </g>
             </g>
         </svg>
-    )
+    );
 };
 
 export default DefaultProfilePicture;

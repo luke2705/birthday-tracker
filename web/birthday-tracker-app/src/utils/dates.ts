@@ -1,4 +1,4 @@
-import { differenceInMonths, format, startOfToday } from "date-fns";
+import { differenceInMonths, format, startOfToday } from 'date-fns';
 
 export function formatBirthday(birthday: Date) {
     return format(birthday, 'MMM d, yyyy');
@@ -20,20 +20,20 @@ function isValidDate(date: Date) {
 
 function getRelativeDisplayAge(ageInMonths: number) {
     if (ageInMonths == 0) {
-        return "----"
+        return '----';
     } else if (Math.abs(ageInMonths) < 24) {
-        return (ageInMonths>0 ? '+': '') + ageInMonths + " month" + (Math.abs(ageInMonths) > 1 ? 's' : '');
+        return (ageInMonths>0 ? '+': '') + ageInMonths + ' month' + (Math.abs(ageInMonths) > 1 ? 's' : '');
     } else {
         const ageInYears = Math.floor(ageInMonths / 12);
-        return (ageInYears>0 ? '+': '') + ageInYears + " year" + (Math.abs(ageInYears) > 1 ? 's' : '');
+        return (ageInYears>0 ? '+': '') + ageInYears + ' year' + (Math.abs(ageInYears) > 1 ? 's' : '');
     }
 }
 
 function getAbsoluteDisplayAge(ageInMonths: number) {
     if (ageInMonths < 24) {
-        return ageInMonths + " month" + (Math.abs(ageInMonths) > 1 ? 's' : '') + " old";
+        return ageInMonths + ' month' + (Math.abs(ageInMonths) > 1 ? 's' : '') + ' old';
     } else {
         const ageInYears = Math.floor(ageInMonths / 12);
-        return ageInYears + " years old";
+        return ageInYears + ' years old';
     }
 }

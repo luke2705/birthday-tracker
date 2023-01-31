@@ -1,14 +1,14 @@
 var sendTextMessage = require('../sms-service/send_sms');
 
 var executeQuery = require('../database/execute-query');
-var format = require('date-fns/format')
-var parseISO = require('date-fns/parseISO')
-var add = require('date-fns/add')
+var format = require('date-fns/format');
+var parseISO = require('date-fns/parseISO');
+var add = require('date-fns/add');
 var express = require('express');
 var router = express.Router();
 
 /* POST reminder */
-router.post('/', async function(req, res, next) {
+router.post('/', async function(req, res) {
     try {
         const birthdays = req.body.birthdayData;
         const phoneNumber = req.body.phoneNumber;
@@ -29,19 +29,19 @@ router.post('/', async function(req, res, next) {
     } catch {
         return res.status(500).send('Error updating reminders');
     }
-})
+});
 
 function generateNewReminderObject(birthday, phoneNumber) {
-    const parsedBirthday = parseISO(birthday.birthday)
+    const parsedBirthday = parseISO(birthday.birthday);
     const reminderDayUnformatted = add(parsedBirthday,   ({days:-1 * (birthday.precedingDaysForReminder)})  );
-    const reminderDay = format(reminderDayUnformatted, 'MMM d, yyyy')
+    const reminderDay = format(reminderDayUnformatted, 'MMM d, yyyy');
     const reminderMessage = generateReminderMessage(birthday);
 
     const newReminder = {
         reminderDay,
         reminderMessage,
         phoneNumber
-    }
+    };
 
     return newReminder;
 }
@@ -64,7 +64,7 @@ async function updateExistingReminder(newReminder) {
 }
 
 async function insertIntoRemindersTable(newReminder) {
-    await executeQuery(`insert into reminders (ReminderDay, ReminderMessage, PhoneNumber) values ('${newReminder.reminderDay}', '${newReminder.reminderMessage}', '${newReminder.phoneNumber}')`)
+    await executeQuery(`insert into reminders (ReminderDay, ReminderMessage, PhoneNumber) values ('${newReminder.reminderDay}', '${newReminder.reminderMessage}', '${newReminder.phoneNumber}')`);
 }
 
 async function removeReminderIfExists(newReminder) {
@@ -72,14 +72,14 @@ async function removeReminderIfExists(newReminder) {
 }
 
 function generateReminderMessage(birthday) {
-    const formattedDate = format(parseISO(birthday.birthday), 'MMM d')
-    return `Automated Reminder: ${birthday.name}s birthday is coming up on ${formattedDate}!`
+    const formattedDate = format(parseISO(birthday.birthday), 'MMM d');
+    return `Automated Reminder: ${birthday.name}s birthday is coming up on ${formattedDate}!`;
 }
 
 function sendSuccessTextMessage(peopleWithReminders, phoneNumber) {
     const lastPerson = peopleWithReminders.pop();
     const peopleString = peopleWithReminders.join(', ') + ' and ' + lastPerson;
-    const successMessage = `You have signed up for birthday reminders for ${peopleString}!`
+    const successMessage = `You have signed up for birthday reminders for ${peopleString}!`;
     sendTextMessage(phoneNumber, successMessage);
 }
 

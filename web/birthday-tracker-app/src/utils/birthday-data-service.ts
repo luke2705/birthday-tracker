@@ -5,7 +5,7 @@ import { BIRTHDAYS_ROUTE, REMINDERS_ROUTE } from './routes';
 
 export async function getBirthdayData(useMockData: boolean) {
     if (useMockData) {
-       return loadMockedData();
+        return loadMockedData();
     } else {
         return await loadDataFromServer();
     }
@@ -22,14 +22,14 @@ async function loadDataFromServer() {
             'Content-Type': 'application/json'
         },
     })
-    .then(res => res.json())
-    .then((result) => {
-           return result;
+        .then(res => res.json())
+        .then((result) => {
+            return result;
         },
         (error) => {
             console.error('error: ', error);
         }
-    )
+        );
 }
 
 export async function postBirthdayReminders(phoneNumber: string, birthdayData: Birthday[]) {
@@ -49,5 +49,5 @@ export async function postBirthdayReminders(phoneNumber: string, birthdayData: B
             console.log('success');
         },
         (error) => console.log('error: ', error)
-        )
+        );
 }

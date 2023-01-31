@@ -24,7 +24,7 @@ const BirthdayChip = (props:any) => {
                 <Birthday>{formatBirthday(birthday)}</Birthday>
             </BirthdayInfoContainer>
         </ChipContainer>
-    )
-}
+    );
+};
 
 export default BirthdayChip;

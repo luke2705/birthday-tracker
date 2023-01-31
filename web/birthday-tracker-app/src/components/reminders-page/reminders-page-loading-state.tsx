@@ -18,11 +18,11 @@ const RemindersPageLoadingState = () => {
                 foregroundColor="#ededed"
             >
                 {[...Array(5)].map((_, index) => {
-                    return <rect x="0" y={(90*index)} rx="4" ry="4" width="1022" height="75" />
+                    return <rect x="0" y={(90*index)} rx="4" ry="4" width="1022" height="75" key={index}/>;
                 })}
             </ContentLoader>
         </PagePadding>
-    )
-}
+    );
+};
 
 export default RemindersPageLoadingState;

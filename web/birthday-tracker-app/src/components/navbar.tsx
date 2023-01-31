@@ -23,7 +23,7 @@ const Navbar = () => {
             <StyledLink to={'/'}>Home</StyledLink>
             <StyledLink to={'/reminders'}>Reminders</StyledLink>
         </NavbarContainer>
-    )
-}
+    );
+};
 
 export default Navbar;

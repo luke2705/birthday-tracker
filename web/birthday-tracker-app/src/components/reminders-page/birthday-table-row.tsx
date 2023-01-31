@@ -1,5 +1,5 @@
 import { StyledSelect, TableData, TableRow } from './reminders-page.styles';
-import { add, format, parseISO } from "date-fns";
+import { add, format, parseISO } from 'date-fns';
 import { Checkbox, MenuItem, SelectChangeEvent } from '@mui/material';
 import React from 'react';
 
@@ -34,7 +34,7 @@ const BirthdayTableRow = (props: any) => {
                 <Checkbox checked={birthdayInfo.reminderEnabled} onChange={handleReminderEnabledChange} color="default" />
             </TableData>
         </TableRow>
-    )
-}
+    );
+};
 
 export default BirthdayTableRow;
