@@ -23,4 +23,15 @@ router.post('/', async function(req, res) {
     }
 });
 
+/* DELETE birthday */
+router.delete('/', async function(req, res) {
+    try {
+        await executeQuery(`delete from birthdays where name='${req.body.name}'`);
+        return res.status(204).send();
+    } catch {
+        return res.status(500).send('Error inserting birthday');
+    }
+});
+
+
 module.exports = router;

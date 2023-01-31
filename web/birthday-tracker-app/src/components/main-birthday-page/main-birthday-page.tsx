@@ -58,6 +58,11 @@ const MainBirthdayPage = (props: any) => {
         setBirthdays(newBirthdayList);
     }
 
+    function removeBirthday(name: string) {
+        const updatedBirthdayList = birthdays.filter(birthday => birthday.name !== name);
+        setBirthdays(updatedBirthdayList);
+    }
+
     return (
         <MainContentContainer>
             <BirthdayChipContainer>
@@ -69,6 +74,7 @@ const MainBirthdayPage = (props: any) => {
                         <BirthdayChip
                             onClick={() => handleBirthdayChipClick(birthdayInfo)}
                             isSelected={birthdayInfo.name === selectedBirthday?.name}
+                            onBirthdayRemove={removeBirthday}
                             comparisonBirthday={selectedBirthday?.birthday}
                             birthdayInfo={birthdayInfo}
                             key={index}

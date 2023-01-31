@@ -33,11 +33,13 @@ export const ChipContainer = styled.span`
 
 export const BirthdayInfoContainer = styled.div`
     text-align: start;
+    width: 100%;
 `;
 
 export const FirstLine = styled.div`
     display: flex;
     align-items: flex-end;
+    justify-content: space-between;
 `;
 
 export const Name = styled.span`
@@ -45,6 +47,11 @@ export const Name = styled.span`
     font-weight: 600;
     margin-right: 10px;
     text-transform: capitalize;
+`;
+
+export const XButton = styled.span`
+    font-size: 20px;
+    font-family: cursive;
 `;
 
 export const Birthday = styled.span`
