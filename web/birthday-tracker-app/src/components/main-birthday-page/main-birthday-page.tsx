@@ -85,9 +85,11 @@ const MainBirthdayPage = (props: any) => {
                     { getInstructionText() }
                 </ClickingInstructions>
             </BirthdayChipContainer>
-            <AddBirthdayButton onClick={() => setShowAddBirthdayOverlay(true)}>
-                Player {birthdays.length + 1} has entered?
-            </AddBirthdayButton>
+            { !isLoading &&
+                <AddBirthdayButton onClick={() => setShowAddBirthdayOverlay(true)}>
+                    Player {birthdays.length + 1} has entered?
+                </AddBirthdayButton>
+            }
             <AddBirthdayOverlay
                 isVisible={showAddBirthdayOverlay}
                 closeOverlay={() => setShowAddBirthdayOverlay(false)}
