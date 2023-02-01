@@ -11,7 +11,7 @@ import BirthdayChipLoadingState from './birthday-chip/birthday-chip-loading-stat
 import AddBirthdayOverlay from '../overlays/add-birthday-overlay/add-birthday-overlay';
 import { compareAsc, parseISO } from 'date-fns';
 import { getBirthdayData } from '../../utils/birthday-data.service';
-
+import Toast from '../overlays/add-birthday-overlay/toast';
 
 
 const MainBirthdayPage = (props: any) => {
@@ -19,6 +19,8 @@ const MainBirthdayPage = (props: any) => {
     const [birthdays, setBirthdays] = useState<Birthday[]>([]);
     const [selectedBirthday, setSelectedBirthday] = useState<Birthday>();
     const [showAddBirthdayOverlay, setShowAddBirthdayOverlay] = useState(false);
+    const [showBdayAddedBanner, setShowBdayAddedBanner] = useState(false);
+    const [showBdayDeletedBanner, setShowBdayDeletedBanner] = useState(false);
 
 
     // get birthday data when this component is initialized
@@ -56,11 +58,13 @@ const MainBirthdayPage = (props: any) => {
             return compareAsc(aBirthday, bBirthday);
         });
         setBirthdays(newBirthdayList);
+        setShowBdayAddedBanner(true);
     }
 
     function removeBirthday(name: string) {
         const updatedBirthdayList = birthdays.filter(birthday => birthday.name !== name);
         setBirthdays(updatedBirthdayList);
+        setShowBdayDeletedBanner(true);
     }
 
     return (
@@ -94,6 +98,17 @@ const MainBirthdayPage = (props: any) => {
                 isVisible={showAddBirthdayOverlay}
                 closeOverlay={() => setShowAddBirthdayOverlay(false)}
                 onBirthdayAdd={addBirthday}/>
+            <Toast
+                open={showBdayAddedBanner}
+                onClose={() => setShowBdayAddedBanner(false)}
+                message={'Birthday Added!'}
+            />
+            <Toast
+                open={showBdayDeletedBanner}
+                onClose={() => setShowBdayDeletedBanner(false)}
+                message={'Birthday Deleted!'}
+                severity={'error'}
+            />
         </MainContentContainer>
     );
 };

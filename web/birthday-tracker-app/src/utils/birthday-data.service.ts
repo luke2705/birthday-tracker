@@ -48,6 +48,8 @@ export async function postBirthdayReminders(phoneNumber: string, birthdayData: B
         .then(() => {
             console.log('success');
         },
-        (error) => console.log('error: ', error)
+        (error) => {
+            throw (error);
+        }
         );
 }
