@@ -25,8 +25,7 @@ router.post('/', async function(req, res) {
                 removeReminderIfExists(newReminder);
             }
         });
-
-        sendSuccessTextMessage(peopleWithReminders);
+        sendSuccessTextMessage(peopleWithReminders, phoneNumber);
         return res.status(204).send();
     } catch {
         return res.status(500).send('Error updating reminders');
