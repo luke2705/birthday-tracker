@@ -5,6 +5,7 @@ import MainBirthdayPage from './components/main-birthday-page/main-birthday-page
 import Navbar from './components/navbar';
 import { Routes, Route } from 'react-router-dom';
 import RemindersPage from './components/reminders-page/reminders-page';
+import { DataSources } from './types/dataSources';
 
 const MockDataRibbon = styled.span`
     background: green;
@@ -22,22 +23,24 @@ const CopyrightText = styled.span`
 `;
 
 function App() {
-    const useMockData = false;
+    const dataSource: string = DataSources.SERVERLESS;
 
     return (
         <div className="App">
             <div>
                 <header className="App-header">
-                    { useMockData &&
+                    { dataSource == DataSources.MOCK &&
                       <MockDataRibbon title={'Consult README for more info'}>
                           Using Mock Data
                       </MockDataRibbon>
                     }
                     <h1>Birthday Tracker</h1>
-                    <Navbar/>
+                    { dataSource != DataSources.SERVERLESS &&
+                        <Navbar/>
+                    }
                 </header>
                 <Routes>
-                    <Route path="/" element={<MainBirthdayPage useMockData={useMockData}/>} />
+                    <Route path="/" element={<MainBirthdayPage dataSource={dataSource}/>} />
                     <Route path="/reminders" element={<RemindersPage/>} />
                 </Routes>
             </div>

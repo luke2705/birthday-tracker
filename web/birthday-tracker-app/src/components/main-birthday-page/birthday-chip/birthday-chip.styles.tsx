@@ -9,7 +9,6 @@ export const ProfilePictureContainer = styled.div`
 `;
 
 export const ChipContainer = styled.span`
-    width: 270px;
     display: inline-flex;
     padding: 15px;
     border: 1px solid gray;
@@ -27,7 +26,10 @@ export const ChipContainer = styled.span`
     }
     
     :not(:last-child) {
-        margin: 0 20px 20px 0;   
+        margin-bottom: 20px;
+        @media (min-width: 500px) {
+            margin-right: 20px;   
+        }
     }
 `;
 

@@ -1,6 +1,6 @@
 import BirthdayChip from './birthday-chip/birthday-chip';
 import React, { useEffect, useState } from 'react';
-import { Birthday } from '../../types/birthday';
+import { Birthday, serverlessBirthdays } from '../../types/birthday';
 import {
     AddBirthdayButton,
     BirthdayChipContainer,
@@ -12,6 +12,7 @@ import AddBirthdayOverlay from '../overlays/add-birthday-overlay/add-birthday-ov
 import { compareAsc, parseISO } from 'date-fns';
 import { getBirthdayData } from '../../utils/birthday-data.service';
 import Toast from '../overlays/add-birthday-overlay/toast';
+import { DataSources } from '../../types/dataSources';
 
 
 const MainBirthdayPage = (props: any) => {
@@ -25,12 +26,17 @@ const MainBirthdayPage = (props: any) => {
 
     // get birthday data when this component is initialized
     useEffect(() => {
-        // simulate server latency to show loading screen
-        setTimeout(async function() {
-            const birthdayData = await getBirthdayData(props.useMockData);
-            setBirthdays(birthdayData);
+        if (props.dataSource == DataSources.SERVERLESS) {
+            setBirthdays(serverlessBirthdays);
             setIsLoading(false);
-        }, 3000);
+        } else {
+        // simulate server latency to show loading screen
+            setTimeout(async function() {
+                const birthdayData = await getBirthdayData(props.useMockData);
+                setBirthdays(birthdayData);
+                setIsLoading(false);
+            }, 3000);
+        }
     }, []);
 
     function handleBirthdayChipClick(birthdayThatWasClicked: Birthday) {
@@ -67,6 +73,10 @@ const MainBirthdayPage = (props: any) => {
         setShowBdayDeletedBanner(true);
     }
 
+    function showAddBirthdayButton() {
+        return !isLoading && props.dataSource != DataSources.SERVERLESS;
+    }
+
     return (
         <MainContentContainer>
             <BirthdayChipContainer>
@@ -77,6 +87,7 @@ const MainBirthdayPage = (props: any) => {
                     birthdays.map((birthdayInfo, index) =>
                         <BirthdayChip
                             onClick={() => handleBirthdayChipClick(birthdayInfo)}
+                            dataSource={props.dataSource}
                             isSelected={birthdayInfo.name === selectedBirthday?.name}
                             onBirthdayRemove={removeBirthday}
                             comparisonBirthday={selectedBirthday?.birthday}
@@ -89,7 +100,7 @@ const MainBirthdayPage = (props: any) => {
                     { getInstructionText() }
                 </ClickingInstructions>
             </BirthdayChipContainer>
-            { !isLoading &&
+            { !showAddBirthdayButton &&
                 <AddBirthdayButton onClick={() => setShowAddBirthdayOverlay(true)}>
                     Player {birthdays.length + 1} has entered?
                 </AddBirthdayButton>

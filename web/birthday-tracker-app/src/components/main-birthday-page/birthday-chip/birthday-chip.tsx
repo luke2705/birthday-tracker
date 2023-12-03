@@ -12,6 +12,7 @@ import DefaultProfilePicture from './default-profile-picture';
 import { add, parseISO } from 'date-fns';
 import { formatBirthday, getDisplayAge } from '../../../utils/dates.service';
 import DeleteBirthdayOverlay from '../../overlays/delete-birthday-overlay/delete-birthday-overlay';
+import { DataSources } from '../../../types/dataSources';
 
 
 const BirthdayChip = (props:any) => {
@@ -37,7 +38,9 @@ const BirthdayChip = (props:any) => {
                             <Name>{props.birthdayInfo?.name}</Name>
                             <span>{getDisplayAge(birthday, comparisonBirthday)}</span>
                         </span>
-                        <XButton onClick={handleXClick}>X</XButton>
+                        { props.dataSource != DataSources.SERVERLESS &&
+                            <XButton onClick={handleXClick}>X</XButton>
+                        }
                     </FirstLine>
                     <Birthday>{formatBirthday(birthday)}</Birthday>
                 </BirthdayInfoContainer>
