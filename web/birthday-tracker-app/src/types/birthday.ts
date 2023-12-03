@@ -6,7 +6,7 @@ export type Birthday = {
 }
 
 export const serverlessBirthdays: Birthday[] = [
-    { name: 'Cass', birthday: '2018-09-18T00:00:00.000Z' },
+    { name: 'Cass', birthday: '2018-09-20T00:00:00.000Z' },
     { name: 'Kade', birthday: '2019-04-18T00:00:00.000Z' },
     { name: 'Owen', birthday: '2020-03-09T00:00:00.000Z' },
     { name: 'Troy', birthday: '2020-07-07T00:00:00.000Z' },
