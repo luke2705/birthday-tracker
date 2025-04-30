@@ -13,5 +13,6 @@ export const serverlessBirthdays: Birthday[] = [
     { name: 'Trevor', birthday: '2020-11-29T00:00:00.000Z' },
     { name: 'Finley', birthday: '2021-08-25T00:00:00.000Z' },
     { name: 'Chloe', birthday: '2023-02-13T00:00:00.000Z' },
+    { name: 'Quinn', birthday: '2025-04-25T00:00:00.000Z' },
 ];
 
