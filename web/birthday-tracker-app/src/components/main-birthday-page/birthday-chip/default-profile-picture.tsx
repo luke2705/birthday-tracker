@@ -5,7 +5,7 @@ import cassAvatar from '../../../assets/avatars/cass.png';
 import kadeAvatar from '../../../assets/avatars/kade.png';
 import chloeAvatar from '../../../assets/avatars/chloe.png';
 import finleyAvatar from '../../../assets/avatars/finley.png';
-import quinnAvatar from '../../../assets/avatars/quinn.png';
+import quinnAvatar from '../../../assets/avatars/quinn2.png';
 import zoeyAvatar from '../../../assets/avatars/zoey.png';
 
 interface DefaultProfilePictureProps {
