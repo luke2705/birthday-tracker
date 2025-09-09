@@ -6,11 +6,12 @@ import kadeAvatar from '../../../assets/avatars/kade.png';
 import chloeAvatar from '../../../assets/avatars/chloe.png';
 import finleyAvatar from '../../../assets/avatars/finley.png';
 import quinnAvatar from '../../../assets/avatars/quinn.png';
+import zoeyAvatar from '../../../assets/avatars/zoey.png';
 
 interface DefaultProfilePictureProps {
     name?: string;
 }
-
+// from https://getavataaars.com/
 const DefaultProfilePicture = ({ name = '' }: DefaultProfilePictureProps) => {
     // Select avatar based on name
     const getAvatarForName = (name: string) => {
@@ -32,6 +33,8 @@ const DefaultProfilePicture = ({ name = '' }: DefaultProfilePictureProps) => {
                 return quinnAvatar;
             case 'finley':
                 return finleyAvatar;
+            case 'zoey':
+                return zoeyAvatar;
             default:
                 return troyAvatar; // Default avatar if no match
         }
